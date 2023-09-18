@@ -23,7 +23,7 @@ dbService:
 
 configMap:
   django:
-    DJANGO_SETTINGS_MODULE: "config.settings.prod"
+    DJANGO_SETTINGS_MODULE: "config.settings.staging"
 secret:
   django:
     DJANGO_SECRET_KEY:
