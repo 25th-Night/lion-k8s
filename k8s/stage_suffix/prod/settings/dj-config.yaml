@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dj-config-prod
+data:
+  DB_HOST: "db-nodeport-prod"
+  DJANGO_SETTINGS_MODULE: "config.settings.prod"
+  NCP_LB_DOMAIN: "init-lb-domain.com"

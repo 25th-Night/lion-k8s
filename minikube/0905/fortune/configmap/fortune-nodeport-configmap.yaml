@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fortune-nodeport-configmap
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: fortune
+  selector:
+    app: fortune-configmap
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}

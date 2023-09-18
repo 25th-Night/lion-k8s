@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: review-lp
+  labels:
+    app: lion-review
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: lion-review
+  template:
+    metadata:
+      labels:
+        app: lion-review
+    spec:
+      containers:
+        - name: review-lp
+          image: teacherssamko/simple-web:unhealthy
+          ports:
+            - containerPort: 8000
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8000
+            initialDelaySeconds: 3
+            periodSeconds: 5

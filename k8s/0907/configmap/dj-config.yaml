@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dj-config
+data:
+  DB_HOST: "198.19.177.124"
+  DJANGO_SETTINGS_MODULE: "config.settings.staging"
+  NCP_LB_DOMAIN: "default-lion-loadbalance-2c7cc-19455953-7f30a050b76d.kr.lb.naverncp.com"

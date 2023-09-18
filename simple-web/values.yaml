@@ -1,0 +1,9 @@
+deployment:
+  image:
+    repository: teacherssamko
+    name: simple-web
+    tag: ""
+    pull_policy: IfNotPresent
+  replicas: 4
+service:
+  type: LoadBalancer

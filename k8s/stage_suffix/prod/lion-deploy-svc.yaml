@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lion-app-prod
+  labels:
+    app: lion-app-prod
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: lion-app-prod
+  template:
+    metadata:
+      labels:
+        app: lion-app-prod
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: lion-app-prod
+        image: browneyed.kr.ncr.ntruss.com/lion-app:0.3.1
+        imagePullPolicy: Always
+        envFrom:
+          - secretRef:
+              name: dj-secret-prod
+          - secretRef:
+              name: db-secret-prod
+          - configMapRef:
+              name: dj-config-prod
+        ports:
+          - containerPort: 8000
+            name: lion-port
+        readinessProbe:
+          httpGet:
+            path: /health/
+            port: 8000
+          initialDelaySeconds: 5
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lion-loadbalancer-prod
+spec:
+  type: LoadBalancer
+  selector:
+    app: lion-app-prod
+  ports:
+    - port: 80
+      targetPort: lion-port

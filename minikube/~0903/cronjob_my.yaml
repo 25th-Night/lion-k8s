@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cron-job-my
+spec:
+  schedule: "0 12 * * *"
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: cron-job
+        spec:
+          containers:
+            - name: csw-batch
+              image: 25thnight/ex_check:v1
+              command: ["python", "main.py"]
+          restartPolicy: OnFailure

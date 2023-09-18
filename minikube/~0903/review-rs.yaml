@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: review-rs
+  labels:
+    app: lion-review
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: lion-review
+  template:
+    metadata:
+      labels:
+        app: lion-review
+    spec:
+      containers:
+      - name: lion-review
+        image: teacherssamko/simple-web:v1
+        ports:
+          - containerPort: 8000
+
